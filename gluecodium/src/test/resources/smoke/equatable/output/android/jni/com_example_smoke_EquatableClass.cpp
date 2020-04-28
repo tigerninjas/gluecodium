@@ -3,7 +3,6 @@
  */
 #include "com_example_smoke_EquatableClass.h"
 #include "com_example_smoke_EquatableClass__Conversion.h"
-#include "com_example_smoke_PointerEquatableClass__Conversion.h"
 #include "ArrayConversionUtils.h"
 #include "JniClassCache.h"
 #include "JniReference.h"

@@ -57,18 +57,31 @@ types Equatable {
 }
 
 @Equatable
-class EquatableClass {
-    @Equatable
-    struct EquatableStruct {
-        intField: Int
-        stringField: String
-        nestedEquatableInstance: EquatableClass
-        nestedPointerEquatableInstance: PointerEquatableClass
-    }
+class EquatableClass {}
+
+class NonEquatableClass {}
+
+@Equatable
+interface EquatableInterface {
+}
+
+interface NonEquatableInterface {
 }
 
 @PointerEquatable
 class PointerEquatableClass {
+}
+
+@Equatable
+struct EquatableStructWithInstances {
+    equatableClass: EquatableClass
+    nonEquatableClass: NonEquatableClass
+    equatableInterface: EquatableInterface
+    nonEquatableInterface: NonEquatableInterface
+    equatableClassNullable: EquatableClass?
+    nonEquatableClassNullable: NonEquatableClass?
+    equatableInterfaceNullable: EquatableInterface?
+    nonEquatableInterfaceNullable: NonEquatableInterface?
 }
 
 @Equatable
@@ -84,8 +97,4 @@ struct EquatableStructWithInternalFields {
     internal internalListField: List<String>
     internal internalMapField: Map<String, String>
     internal internalSetField: Set<String>
-}
-
-@Equatable
-interface EquatableInterface {
 }

@@ -135,8 +135,7 @@ class SwiftModelBuilder(
             nameSpace = limeClass.path.head.joinToString("_"),
             cInstance = CBridgeNameRules.getInterfaceName(limeClass),
             useParentCInstance = parentClass != null && !parentClass.isInterface,
-            hasEquatableType = limeClass.attributes.have(LimeAttributeType.EQUATABLE) ||
-                    limeClass.attributes.have(LimeAttributeType.POINTER_EQUATABLE),
+            hasEquatableType = limeClass.attributes.have(LimeAttributeType.EQUATABLE),
             isObjcInterface = isObjcInterface,
             hasTypeRepository = parentClass != null || limeClass.visibility.isOpen
         )

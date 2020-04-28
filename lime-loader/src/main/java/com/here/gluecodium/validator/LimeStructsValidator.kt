@@ -21,7 +21,6 @@ package com.here.gluecodium.validator
 
 import com.here.gluecodium.common.LimeLogger
 import com.here.gluecodium.model.lime.LimeAttributeType
-import com.here.gluecodium.model.lime.LimeContainer
 import com.here.gluecodium.model.lime.LimeModel
 import com.here.gluecodium.model.lime.LimeStruct
 
@@ -42,20 +41,20 @@ internal class LimeStructsValidator(private val logger: LimeLogger) {
     }
 
     private fun validateEquatable(limeStruct: LimeStruct): Boolean {
-        val nonEquatableFieldTypes = limeStruct.childTypes.asSequence()
+        val nonEquatableStructFieldTypes = limeStruct.childTypes.asSequence()
             .map { it.type }
+            .filterIsInstance<LimeStruct>()
             .filterNot { it.attributes.have(LimeAttributeType.EQUATABLE) }
-            .filterNot { it.attributes.have(LimeAttributeType.POINTER_EQUATABLE) }
 
         return when {
             limeStruct.fields.isEmpty() -> {
                 logger.error(limeStruct, "an equatable struct should have at least one field")
                 false
             }
-            nonEquatableFieldTypes.any { it is LimeContainer } -> {
+            nonEquatableStructFieldTypes.any() -> {
                 logger.error(
                     limeStruct,
-                    "fields of non-equatable types are not supported for equatable structs"
+                    "fields of non-equatable struct types are not supported for equatable structs"
                 )
                 false
             }

@@ -94,18 +94,15 @@ class EquatableClass {
     @Dart("areEqualAnother")
     static fun areEqual(
         lhs: AnotherEquatableStruct,
-
         rhs: AnotherEquatableStruct
     ): Boolean
     static fun areEqual(
         lhs: Equatable.EquatableStruct,
-
         rhs: Equatable.EquatableStruct
     ): Boolean
     @Dart("areEqualNullable")
     static fun areEqual(
         lhs: Equatable.EquatableNullableStruct,
-
         rhs: Equatable.EquatableNullableStruct
     ): Boolean
     @Dart("haveSameHashAnother")
@@ -182,4 +179,20 @@ interface EquatableInterface {
 
 class EquatableInterfaceFactory {
     static fun createEquatableInterface(name: String): EquatableInterface
+}
+
+class NonEquatableClass {}
+
+interface NonEquatableInterface {}
+
+@Equatable
+struct EquatableStructWithInstances {
+    equatableClass: EquatableClass
+    nonEquatableClass: NonEquatableClass
+    equatableInterface: EquatableInterface
+    nonEquatableInterface: NonEquatableInterface
+    equatableClassNullable: EquatableClass?
+    nonEquatableClassNullable: NonEquatableClass?
+    equatableInterfaceNullable: EquatableInterface?
+    nonEquatableInterfaceNullable: NonEquatableInterface?
 }
