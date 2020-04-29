@@ -5,6 +5,9 @@
   * Added referential integrity for classes and interfaces in generated platform code. Meaning, when
     the same C++ object is passed twice to platform (Java/Swift/Dart) side, it is now guaranteed to
     be the same object on platform side as well.
+### Deprecated:
+  * `@PointerEquatable` IDL attribute is now deprecated. All classes are now automatically "pointer
+    equatable" in Java/Swift/Dart, as a side-effect of referential integrity implementation.
 
 ## 6.6.2
 Release date: 2020-05-04

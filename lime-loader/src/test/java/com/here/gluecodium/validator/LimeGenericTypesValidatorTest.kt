@@ -86,11 +86,7 @@ class LimeGenericTypesValidatorTest(
                 attributes =
                     LimeAttributes.Builder().addAttribute(LimeAttributeType.EQUATABLE).build()
             ), true),
-            arrayOf(LimeClass(
-                EMPTY_PATH,
-                attributes = LimeAttributes.Builder()
-                    .addAttribute(LimeAttributeType.POINTER_EQUATABLE).build()
-            ), true),
+            arrayOf(LimeClass(EMPTY_PATH), true),
             arrayOf(LimeTypeAlias(EMPTY_PATH, typeRef = LimeBasicTypeRef.INT), true),
             arrayOf(LimeTypeAlias(
                 EMPTY_PATH,

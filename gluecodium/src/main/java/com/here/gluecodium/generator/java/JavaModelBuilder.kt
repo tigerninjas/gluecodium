@@ -463,8 +463,7 @@ class JavaModelBuilder(
             fields = getPreviousResults(JavaField::class.java),
             isImplClass = true,
             needsDisposer = parentContainer == null,
-            hasNativeEquatable = limeClass.attributes.have(LimeAttributeType.EQUATABLE) ||
-                    limeClass.attributes.have(LimeAttributeType.POINTER_EQUATABLE)
+            hasNativeEquatable = limeClass.attributes.have(LimeAttributeType.EQUATABLE)
         )
         javaClass.visibility = getVisibility(limeClass)
         if (limeClass.visibility == LimeVisibility.PUBLIC) {

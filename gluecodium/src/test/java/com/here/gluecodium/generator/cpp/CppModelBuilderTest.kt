@@ -515,24 +515,6 @@ class CppModelBuilderTest {
     }
 
     @Test
-    fun finishBuildingFieldReadsIsClassPointerEquatable() {
-        contextStack.injectResult(cppTypeRef)
-        val limeInterface = LimeInterface(
-            EMPTY_PATH,
-            attributes = LimeAttributes.Builder()
-                .addAttribute(LimeAttributeType.POINTER_EQUATABLE)
-                .build()
-        )
-
-        val field = LimeField(EMPTY_PATH, typeRef = LimeDirectTypeRef(limeInterface))
-
-        modelBuilder.finishBuilding(field)
-
-        val result = modelBuilder.getFinalResult(CppField::class.java)
-        assertTrue(result.isClassPointerEquatable)
-    }
-
-    @Test
     fun finishBuildingTypeDefReadsName() {
         contextStack.injectResult(cppTypeRef)
         val limeElement = LimeTypeAlias(EMPTY_PATH, typeRef = LimeBasicTypeRef.DOUBLE)

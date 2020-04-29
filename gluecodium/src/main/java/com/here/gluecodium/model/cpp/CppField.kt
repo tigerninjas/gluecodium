@@ -28,7 +28,7 @@ class CppField(
     val isNullable: Boolean = false,
     val hasImmutableType: Boolean = false,
     val isClassEquatable: Boolean = false,
-    val isClassPointerEquatable: Boolean = false,
+    val isInstance: Boolean = false,
     val getterName: String? = null,
     val setterName: String? = null
 ) : CppTypedElement(name, fullyQualifiedName, type) {
@@ -40,5 +40,5 @@ class CppField(
     fun hasComment() = !comment.isEmpty || isNotNull
 
     @Suppress("unused")
-    val needsPointerValueEqual = isNullable && !isClassPointerEquatable || isClassEquatable
+    val needsPointerValueEqual = isNullable && !isInstance || isClassEquatable
 }

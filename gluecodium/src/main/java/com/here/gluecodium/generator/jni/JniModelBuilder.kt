@@ -115,7 +115,6 @@ class JniModelBuilder(
             },
             internalNamespace = internalNamespace,
             isEquatable = limeContainer.attributes.have(LimeAttributeType.EQUATABLE),
-            isPointerEquatable = limeContainer.attributes.have(LimeAttributeType.POINTER_EQUATABLE),
             hasTypeRepository = cppClass.isInheritable || cppClass.inheritances.isNotEmpty(),
             hasConstructors = limeContainer.constructors.isNotEmpty()
         )

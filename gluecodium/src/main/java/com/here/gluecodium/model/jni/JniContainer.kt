@@ -40,7 +40,6 @@ class JniContainer(
     val containerType: ContainerType = ContainerType.TYPE_COLLECTION,
     var internalNamespace: List<String>? = null,
     val isEquatable: Boolean = false,
-    val isPointerEquatable: Boolean = false,
     @Suppress("unused") val hasTypeRepository: Boolean = false,
     @Suppress("unused") val isFunctionalInterface: Boolean = false,
     @Suppress("unused") val hasConstructors: Boolean = false
@@ -50,8 +49,6 @@ class JniContainer(
     val structs: MutableList<JniStruct> = mutableListOf()
     val enums: MutableList<JniEnum> = mutableListOf()
     val includes: MutableSet<Include> = LinkedHashSet()
-    @Suppress("unused")
-    val hasNativeEquatable = isEquatable || isPointerEquatable
     @Suppress("unused")
     val fullJavaName = (javaPackage.packageNames + javaNames.joinToString("$")).joinToString("/")
     @Suppress("unused")

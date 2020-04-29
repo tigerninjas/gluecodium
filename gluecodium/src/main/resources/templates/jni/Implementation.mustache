@@ -84,31 +84,20 @@ Java_{{mangledName}}_cacheThisInstance(JNIEnv* _jenv, jobject _jinstance)
 }
 {{/if}}
 {{/instanceOf}}
-{{#hasNativeEquatable}}
+{{#if isEquatable}}
 jboolean
 {{#set javaMethodName="equals"}}{{>jni/FunctionSignaturePrefix}}{{/set}}, jobject jrhs)
 {
     if (_jinstance == nullptr || jrhs == nullptr) {
         return _jinstance == jrhs;
     }
-{{#isPointerEquatable}}
-    auto jclass = {{>common/InternalNamespace}}jni::get_object_class(_jenv, _jinstance);
-{{/isPointerEquatable}}
-{{#isEquatable}}
     auto& jclass = {{>common/InternalNamespace}}jni::get_cached_native_base_class();
-{{/isEquatable}}
     if (!_jenv->IsInstanceOf(jrhs, jclass.get())) {
         return false;
     }
     auto lhs = {{#set jobjectName="_jinstance"}}{{>sharedInstance}}{{/set}}
-{{#isPointerEquatable}}
-    auto rhs = {{#set jobjectName="jrhs" cppFullyQualifiedName="void"}}{{>sharedInstance}}{{/set}}
-    return *lhs == *rhs;
-{{/isPointerEquatable}}
-{{#isEquatable}}
     auto rhs = {{#set jobjectName="jrhs"}}{{>sharedInstance}}{{/set}}
     return **lhs == **rhs;
-{{/isEquatable}}
 }
 
 jint
@@ -117,7 +106,7 @@ jint
     auto pInstanceSharedPointer = {{#set jobjectName="_jinstance"}}{{>sharedInstance}}{{/set}}
     return {{>common/InternalNamespace}}hash<std::shared_ptr<{{cppFullyQualifiedName}}> >()(*pInstanceSharedPointer);
 }
-{{/hasNativeEquatable}}
+{{/if}}
 }
 {{/container}}{{!!
 

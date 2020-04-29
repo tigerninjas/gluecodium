@@ -708,19 +708,4 @@ class SwiftModelBuilderTest {
         val result = modelBuilder.getFinalResult(SwiftClass::class.java)
         assertTrue(result.hasEquatableType)
     }
-
-    @Test
-    fun finishBuildingClassReadsPointerEquatable() {
-        val limeElement = LimeClass(
-            fooPath,
-            attributes = LimeAttributes.Builder()
-                .addAttribute(LimeAttributeType.POINTER_EQUATABLE)
-                .build()
-        )
-
-        modelBuilder.finishBuilding(limeElement)
-
-        val result = modelBuilder.getFinalResult(SwiftClass::class.java)
-        assertTrue(result.hasEquatableType)
-    }
 }

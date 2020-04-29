@@ -309,20 +309,6 @@ class JavaModelBuilderContainersTest {
     }
 
     @Test
-    fun finishBuildingClassReadsPointerEquatable() {
-        val limeElement = LimeClass(
-            LimePath(emptyList(), listOf("foo")),
-            attributes =
-                LimeAttributes.Builder().addAttribute(LimeAttributeType.POINTER_EQUATABLE).build()
-        )
-
-        modelBuilder.finishBuilding(limeElement)
-
-        val result = modelBuilder.getFinalResult(JavaClass::class.java)
-        assertTrue(result.hasNativeEquatable)
-    }
-
-    @Test
     fun finishBuildingClassReadsEquatable() {
         val limeElement = LimeClass(
             LimePath(emptyList(), listOf("foo")),

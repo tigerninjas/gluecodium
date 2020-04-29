@@ -135,8 +135,8 @@ class SwiftModelBuilder(
             nameSpace = limeClass.path.head.joinToString("_"),
             cInstance = CBridgeNameRules.getInterfaceName(limeClass),
             useParentCInstance = parentClass != null && !parentClass.isInterface,
-            hasEquatableType = limeClass.attributes.have(LimeAttributeType.EQUATABLE) ||
-                    limeClass.attributes.have(LimeAttributeType.POINTER_EQUATABLE),
+            hasEquatableType = true,
+            hasNativeEquatable = limeClass.attributes.have(LimeAttributeType.EQUATABLE),
             isObjcInterface = isObjcInterface,
             hasTypeRepository = parentClass != null || limeClass.visibility.isOpen
         )
@@ -155,6 +155,7 @@ class SwiftModelBuilder(
     private fun finishBuildingInterface(limeContainer: LimeInterface) {
         val parentClass =
             limeContainer.parent?.type?.let { buildTransientModel(it).first().classes.first() }
+        val isNativeEquatable = limeContainer.attributes.have(LimeAttributeType.EQUATABLE)
         val swiftClass = SwiftClass(
             nestedNames = nameResolver.getNestedNames(limeContainer),
             visibility = getVisibility(limeContainer),
@@ -163,7 +164,8 @@ class SwiftModelBuilder(
             nameSpace = limeContainer.path.head.joinToString("_"),
             cInstance = CBridgeNameRules.getInterfaceName(limeContainer),
             functionTableName = CBridgeNameRules.getFunctionTableName(limeContainer),
-            hasEquatableType = limeContainer.attributes.have(LimeAttributeType.EQUATABLE),
+            hasEquatableType = isNativeEquatable,
+            hasNativeEquatable = isNativeEquatable,
             isObjcInterface = limeContainer.attributes.have(SWIFT, LimeAttributeValueType.OBJC),
             hasTypeRepository = true
         )

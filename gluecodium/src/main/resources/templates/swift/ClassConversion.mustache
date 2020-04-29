@@ -52,17 +52,19 @@ public func ==(lhs: {{name}}, rhs: {{name}}) -> Bool {
     return lhsImpl == rhsImpl
 }
 
-{{/if}}
+{{/if}}{{#unless parentClass}}
 extension {{implName}}: Hashable {
     public static func == (lhs: {{implName}}, rhs: {{implName}}) -> Bool {
-        return {{cInstance}}_equal(lhs.c_handle, rhs.c_handle)
+        return {{#if hasNativeEquatable}}{{cInstance}}_equal(lhs.c_handle, rhs.c_handle){{/if}}{{!!
+        }}{{#unless hasNativeEquatable}}lhs === rhs{{/unless}}
     }
 
     public func hash(into hasher: inout Hasher) {
-        hasher.combine({{cInstance}}_hash(c_handle))
+        hasher.combine({{#if hasNativeEquatable}}{{cInstance}}_hash(c_handle){{/if}}{{!!
+        }}{{#unless hasNativeEquatable}}Unmanaged<AnyObject>.passUnretained(self).toOpaque(){{/unless}})
     }
 }
-{{/if}}
+{{/unless}}{{/if}}
 
 internal func {{mangledName}}copyFromCType(_ handle: _baseRef) -> {{name}} {
 {{#if isInterface}}

@@ -29,6 +29,7 @@ class SwiftClass(
     val functionTableName: String? = null,
     val useParentCInstance: Boolean = false,
     val hasEquatableType: Boolean = false,
+    val hasNativeEquatable: Boolean = false,
     @Suppress("unused") val isObjcInterface: Boolean = false,
     @Suppress("unused") val hasTypeRepository: Boolean = false
 ) : SwiftType(

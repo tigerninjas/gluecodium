@@ -239,21 +239,6 @@ class CBridgeModelBuilderTest {
 
         val result = modelBuilder.getFinalResult(CInterface::class.java)
         assertTrue(result.isEquatable)
-        assertTrue(result.hasEquatableType)
-    }
-
-    @Test
-    fun finishBuildingContainerReadsPointerEquatable() {
-        val limeContainer = LimeClass(
-            fooPath,
-            attributes =
-                LimeAttributes.Builder().addAttribute(LimeAttributeType.POINTER_EQUATABLE).build()
-        )
-        modelBuilder.finishBuilding(limeContainer)
-
-        val result = modelBuilder.getFinalResult(CInterface::class.java)
-        assertTrue(result.isPointerEquatable)
-        assertTrue(result.hasEquatableType)
     }
 
     @Test

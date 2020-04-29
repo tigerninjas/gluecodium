@@ -35,7 +35,6 @@ class CInterface(
     val functionTableName: String? = null,
     val enums: List<CEnum> = listOf(),
     val isEquatable: Boolean = false,
-    val isPointerEquatable: Boolean = false,
     @Suppress("unused") val hasTypeRepository: Boolean = false,
     @Suppress("unused") val isFunctionalInterface: Boolean = false
 
@@ -48,6 +47,4 @@ class CInterface(
     // only interfaces have a functionTableName
     val isInterface =
         functionTableName != null && functionTableName.isNotEmpty() && selfType != null
-
-    val hasEquatableType = isEquatable || isPointerEquatable
 }

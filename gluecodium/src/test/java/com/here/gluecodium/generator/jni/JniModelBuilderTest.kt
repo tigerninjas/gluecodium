@@ -315,20 +315,6 @@ class JniModelBuilderTest {
     }
 
     @Test
-    fun finishBuildingInterfaceReadsPointerEquatable() {
-        val limeElement = LimeClass(
-            fooPath,
-            attributes = LimeAttributes.Builder()
-                .addAttribute(LimeAttributeType.POINTER_EQUATABLE)
-                .build()
-        )
-        modelBuilder.finishBuilding(limeElement)
-
-        val jniContainer = modelBuilder.getFinalResult(JniContainer::class.java)
-        assertTrue(jniContainer.isPointerEquatable)
-    }
-
-    @Test
     fun finishBuildingInterfaceReadsEquatable() {
         val limeElement = LimeClass(
             fooPath,

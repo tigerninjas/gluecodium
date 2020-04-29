@@ -44,10 +44,10 @@ _GLUECODIUM_C_EXPORT void {{name}}_remove_swift_object_from_wrapper_cache(_baseR
 {{#if hasTypeRepository}}_GLUECODIUM_C_EXPORT void* {{name}}_get_typed(_baseRef handle);{{/if}}
 
 {{/if}}
-{{#hasEquatableType}}
+{{#if isEquatable}}
 _GLUECODIUM_C_EXPORT bool {{name}}_equal(_baseRef lhs, _baseRef rhs);
 _GLUECODIUM_C_EXPORT uint64_t {{name}}_hash(_baseRef handle);
-{{/hasEquatableType}}
+{{/if}}
 {{#isInterface}}
 {{>cbridge/FunctionTable}}
 

@@ -33,13 +33,13 @@ JNIEXPORT {{returnType.name}} JNICALL
 {{>jni/FunctionSignature}};
 
 {{/methods}}
-{{#hasNativeEquatable}}
+{{#if isEquatable}}
 JNIEXPORT jboolean JNICALL
 {{#set javaMethodName="equals"}}{{>jni/FunctionSignaturePrefix}}{{/set}}, jobject jrhs);
 
 JNIEXPORT jint JNICALL
 {{#set javaMethodName="hashCode"}}{{>jni/FunctionSignature}}{{/set}};
-{{/hasNativeEquatable}}
+{{/if}}
 {{/container}}
 
 #ifdef __cplusplus

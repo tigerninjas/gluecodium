@@ -98,7 +98,7 @@ object CBridgeComponents {
         for (enumType in cInterface.enums) {
             includes.addAll(enumType.includes)
         }
-        if (cInterface.hasEquatableType || cInterface.functions.any { it.error != null }) {
+        if (cInterface.isEquatable || cInterface.functions.any { it.error != null }) {
             includes.add(CType.BOOL_INCLUDE)
         }
         includes += cInterface.interfaces.flatMap { collectHeaderIncludes(it) }
