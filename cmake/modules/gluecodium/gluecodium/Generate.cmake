@@ -185,11 +185,14 @@ function(apigen_generate)
   set (_lime_interface_sources "$<FILTER:$<TARGET_PROPERTY:${APIGEN_TARGET},INTERFACE_SOURCES>,INCLUDE,.*\\.lime$>")
   set (_lime_sources "$<FILTER:$<TARGET_PROPERTY:${APIGEN_TARGET},SOURCES>,INCLUDE,.*\\.lime$>")
 
+  set (_gluecodium_args_file "${CMAKE_CURRENT_BINARY_DIR}/gluecodium-command-line.txt")
+  file (WRITE "${_gluecodium_args_file}" "${APIGEN_GLUECODIUM_ARGS}")
+
   add_custom_command(OUTPUT ${_generated_files}
     COMMAND ${CMAKE_COMMAND}
         -DAPIGEN_TARGET=${APIGEN_TARGET}
         -DBUILD_LOCAL_GLUECODIUM=${BUILD_LOCAL_GLUECODIUM}
-        -DAPIGEN_GLUECODIUM_ARGS=${APIGEN_GLUECODIUM_ARGS}
+        -DAPIGEN_GLUECODIUM_ARGS_FILE=${_gluecodium_args_file}
         -DAPIGEN_GLUECODIUM_VERSION=${apigen_generate_VERSION}
         -DAPIGEN_GLUECODIUM_DIR=${APIGEN_GLUECODIUM_DIR}
         -DAPIGEN_GENERATOR=${APIGEN_GENERATOR}
